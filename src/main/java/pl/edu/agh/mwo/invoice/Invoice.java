@@ -1,31 +1,68 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
+
+    private BigDecimal subtotal;
+    private BigDecimal tax;
+    private BigDecimal total;
     private Collection<Product> products;
 
+    public Invoice(){
+        this.subtotal = new BigDecimal(0);
+        this.tax = new BigDecimal(0);
+        this.total = new BigDecimal(0);
+        this.products = new ArrayList<Product>();
+    }
     public void addProduct(Product product) {
-        // TODO: implement
+        if(product == null){
+            throw new IllegalArgumentException();
+        }
+        products.add(product);
+        BigDecimal newSubtotal = getSubtotal().add(product.getPrice());
+        setSubtotal(newSubtotal);
+
+        BigDecimal newTotal = getTotal().add(product.getPriceWithTax());
+        setTotal(newTotal);
+
+        BigDecimal newTax = getTax().add(product.getTaxPercent().multiply(product.getPrice()));
+        setTax(newTax);
     }
 
     public void addProduct(Product product, Integer quantity) {
-        // TODO: implement
-//        fsdfsf
+        if(quantity == null || quantity <= 0){
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0 ; i<quantity; i++){
+            addProduct(product);
+        }
     }
 
     public BigDecimal getSubtotal() {
-        return null;
+        return subtotal;
+    }
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
     }
 
-    public BigDecimal getTax() {
-        return null;
+    public BigDecimal getTax() { return tax; }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
     }
+
 
     public BigDecimal getTotal() {
-        return null;
+        return total;
+    }
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 }
