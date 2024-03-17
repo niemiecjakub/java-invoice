@@ -8,13 +8,13 @@ import java.util.Random;
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
+    private int UPPERBOUND = 1000000;
     private Integer number;
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
     public Invoice() {
         Random rand = new Random();
-        int upperbound = 1000000;
-        this.number = rand.nextInt(1000000);
+        this.number = rand.nextInt(UPPERBOUND);
     }
 
     public void addProduct(Product product) {
