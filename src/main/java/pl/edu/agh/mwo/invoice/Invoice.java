@@ -3,11 +3,19 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
+    private Integer number;
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
+
+    public Invoice() {
+        Random rand = new Random();
+        int upperbound = 1000000;
+        this.number = rand.nextInt(1000000);
+    }
 
     public void addProduct(Product product) {
         addProduct(product, 1);
@@ -40,5 +48,9 @@ public class Invoice {
             totalGross = totalGross.add(product.getPriceWithTax().multiply(quantity));
         }
         return totalGross;
+    }
+
+    public Integer getNumber() {
+        return number;
     }
 }
