@@ -25,3 +25,4 @@ jobs:
           distribution: 'adopt'
       - name: List
         run: mvn checkstyle:check
+
