@@ -8,13 +8,12 @@ import java.util.Random;
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-    private static final int upperbound = 100000;
+    private static int invoiceCount = 0;
     private Integer number;
     private Map<Product, Integer> products = new HashMap<Product, Integer>();
 
     public Invoice() {
-        Random rand = new Random();
-        this.number = rand.nextInt(upperbound);
+        this.number = ++invoiceCount;
     }
 
     public void addProduct(Product product) {
@@ -56,5 +55,21 @@ public class Invoice {
 
     public Map<Product, Integer> getProducts() {
         return products;
+    }
+
+    public String getProductList() {
+        String productList = "";
+        productList += "Nr: " + number + "\n";
+        int totalProducts = 0;
+        for (Product product: products.keySet()) {
+            String name = product.getName();
+            Integer quantity = products.get(product);
+            BigDecimal price = product.getPrice();
+
+            productList += name + " - " + quantity + " szt - " + price + " PLN \n";
+            totalProducts += quantity;
+        }
+        productList += "Lista pozycji: " + totalProducts;
+        return productList;
     }
 }

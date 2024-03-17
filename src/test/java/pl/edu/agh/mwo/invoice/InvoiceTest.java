@@ -28,6 +28,13 @@ public class InvoiceTest {
     }
 
     @Test
+    public void testNextInvoiceNumberIsInOrder(){
+        int invoice1number = new Invoice().getNumber();
+        int invoice2number = new Invoice().getNumber();
+        Assert.assertThat(invoice2number - 1, Matchers.comparesEqualTo(invoice1number));
+    }
+
+    @Test
     public void testEmptyInvoiceHasEmptySubtotal() {
         Assert.assertThat(BigDecimal.ZERO, Matchers.comparesEqualTo(invoice.getNetTotal()));
     }
@@ -130,5 +137,11 @@ public class InvoiceTest {
     @Test(expected = IllegalArgumentException.class)
     public void testAddingNullProduct() {
         invoice.addProduct(null);
+    }
+
+    @Test
+    public void testProductListPrint() {
+        int number = invoice.getNumber();
+        String productListPrint = invoice.getProductList();
     }
 }
