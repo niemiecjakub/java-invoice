@@ -3,6 +3,7 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
@@ -18,8 +19,8 @@ public class Invoice {
         this.tax = new BigDecimal(0);
         this.total = new BigDecimal(0);
         this.products = new ArrayList<Product>();
-        this.number = InvoiceCounter.getInvoiceCount();
-        InvoiceCounter.incrementInvoiceCount();
+        this.number = InvoiceUtil.getInvoiceCount();
+        InvoiceUtil.incrementInvoiceCount();
     }
 
     public Integer countProducts(){
@@ -63,7 +64,6 @@ public class Invoice {
     public void setTax(BigDecimal tax) {
         this.tax = tax;
     }
-
 
     public BigDecimal getTotal() {
         return total;

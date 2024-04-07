@@ -2,11 +2,14 @@ package pl.edu.agh.mwo.invoice.product;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Date;
 
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Test;
 
+import pl.edu.agh.mwo.invoice.InvoiceUtil;
+import pl.edu.agh.mwo.invoice.InvoiceUtilTest;
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class   ProductTest {

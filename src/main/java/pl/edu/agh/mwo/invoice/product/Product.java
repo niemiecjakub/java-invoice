@@ -3,11 +3,11 @@ package pl.edu.agh.mwo.invoice.product;
 import java.math.BigDecimal;
 
 public abstract class Product {
-    private final String name;
+    private String name;
 
-    private final BigDecimal price;
+    private BigDecimal price;
 
-    private final BigDecimal taxPercent;
+    private BigDecimal taxPercent;
 
     protected Product(String name, BigDecimal price, BigDecimal tax) throws IllegalArgumentException{
         if(name == null || name.isEmpty()){
@@ -33,6 +33,7 @@ public abstract class Product {
     public BigDecimal getTaxPercent() {
         return taxPercent;
     }
+    public void setTaxPercent(BigDecimal taxPercent) {this.taxPercent = taxPercent;}
 
     public BigDecimal getPriceWithTax() {
         return price.add(price.multiply(taxPercent));

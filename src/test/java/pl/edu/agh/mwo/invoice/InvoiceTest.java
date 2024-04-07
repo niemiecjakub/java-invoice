@@ -1,6 +1,7 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +38,11 @@ public class InvoiceTest {
     public void testEmptyInvoiceHasEmptyTotal() {
         Assert.assertThat(BigDecimal.ZERO, Matchers.comparesEqualTo(invoice.getTotal()));
     }
+
+//    @Test
+//    public void testEmptyInvoiceHasCurentDate() {
+//        Assert.assertThat(new Date(), Matchers.comparesEqualTo(invoice.getDate()));
+//    }
 
     @Test
     public void testInvoiceSubtotalWithTwoDifferentProducts() {
@@ -136,8 +142,8 @@ public class InvoiceTest {
         int n2 = nextInvoice.getNumber();
         int numberDifference = n2 - n1;
         Assert.assertThat(1, Matchers.comparesEqualTo(numberDifference));
-
     }
+
 
     @Test
     public void testProductCount(){

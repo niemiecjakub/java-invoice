@@ -41,17 +41,9 @@ public class InvoicePrinterTest {
     @Test
     public void testInvoicePrintLength(){
         String[] lines = invoicePrinter.print().split(System.lineSeparator());
-        HashSet<String> productNames =  new HashSet<>();
+        HashSet<String> productNames = new HashSet<>();
         invoicePrinter.invoice.getProducts().forEach(p -> productNames.add(p.getName()));
         //unique products + header + footer
         Assert.assertThat( productNames.size()+ 2, Matchers.comparesEqualTo(lines.length));
     }
-
-    @Test
-    public void testInvoicePrintProduct(){
-        String print = invoicePrinter.print();
-        System.out.println(print);
-    }
-
-
 }
