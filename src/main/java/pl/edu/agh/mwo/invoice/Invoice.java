@@ -1,15 +1,12 @@
 package pl.edu.agh.mwo.invoice;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
-
+    private Integer number;
     private BigDecimal subtotal;
     private BigDecimal tax;
     private BigDecimal total;
@@ -20,7 +17,24 @@ public class Invoice {
         this.tax = new BigDecimal(0);
         this.total = new BigDecimal(0);
         this.products = new ArrayList<Product>();
+        this.number = InvoiceCounter.getInvoiceCount();
+        InvoiceCounter.incrementInvoiceCount();
     }
+
+    public String printInvoice(){
+        StringBuilder sb = new StringBuilder();
+        String header = "Numer faktury: " + number + System.lineSeparator();
+        String footer = "Liczba pozycji: " + countProducts();
+        sb.append(header);
+        sb.append(footer);
+        return sb.toString();
+
+    }
+
+    public Integer countProducts(){
+        return products.size();
+    }
+
     public void addProduct(Product product) {
         if(product == null){
             throw new IllegalArgumentException();
@@ -64,5 +78,12 @@ public class Invoice {
     }
     public void setTotal(BigDecimal total) {
         this.total = total;
+    }
+
+    public Collection<Product> getProducts() {
+        return products;
+    }
+    public Integer getNumber() {
+        return number;
     }
 }

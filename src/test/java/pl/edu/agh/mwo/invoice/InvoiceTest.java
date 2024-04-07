@@ -125,4 +125,45 @@ public class InvoiceTest {
     public void testAddingNullProduct() {
         invoice.addProduct(null);
     }
+
+
+    @Test
+    public void testNextInvoiceHasIncreasedNumber(){
+        int n1 = invoice.getNumber();
+        Invoice nextInvoice = new Invoice();
+        int n2 = nextInvoice.getNumber();
+        int numberDifference = n2 - n1;
+        Assert.assertThat(1, Matchers.comparesEqualTo(numberDifference));
+
+    }
+
+    @Test
+    public void testInvoicePrintHeader(){
+        String invoiceHeader = invoice.printInvoice().split(System.lineSeparator())[0];
+        System.out.println(invoiceHeader);
+        System.out.println("----");
+        String[] lines = invoice.printInvoice().split(System.lineSeparator());
+        System.out.println(lines.length);
+        System.out.println(invoice.printInvoice());
+        Assert.assertThat("Numer faktury: " + invoice.getNumber(), Matchers.comparesEqualTo(invoiceHeader));
+    }
+
+    @Test
+    public void testInvoicePrintFooter(){
+        String[] lines = invoice.printInvoice().split(System.lineSeparator());
+        String footer = lines[lines.length - 1];
+
+        Assert.assertThat("Liczba pozycji: " + invoice.countProducts(), Matchers.comparesEqualTo(footer));
+    }
+
+    @Test
+    public void testProductCount(){
+        //2
+        invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
+        //2 + 3 = 5
+        invoice.addProduct(new DairyProduct("Chedar", new BigDecimal("10")), 3);
+        //5 + 1000 = 1005
+        invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
+        Assert.assertThat(1005, Matchers.comparesEqualTo(invoice.countProducts()));
+    }
 }
