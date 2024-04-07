@@ -2,6 +2,11 @@ package pl.edu.agh.mwo.invoice;
 
 import pl.edu.agh.mwo.invoice.product.Product;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.Collection;
+import java.util.HashSet;
+
 public class InvoicePrinter {
     public Invoice invoice;
     public InvoicePrinter(Invoice invoice){
@@ -16,13 +21,25 @@ public class InvoicePrinter {
     }
 
     public String print(){
-        StringBuilder sb = new StringBuilder();
-        sb.append(header());
-        for (Product product: invoice.getProducts()) {
-            String productLine = "Produkt: " + product.getName() + "\tIlosc: " + 0 + "\tCena: " + product.getPriceWithTax() + System.lineSeparator();
-            sb.append(productLine);
+        HashSet<String> printedProducts = new HashSet<>();
+
+        String invoicePrint = header();
+        Collection<Product> products= invoice.getProducts();
+
+        for (Product product: products) {
+            String name = product.getName();
+
+            if (printedProducts.contains(name)) {
+                continue;
+            }
+            long count = products.stream().filter(product1 -> product1.getName().equals(name)).count();
+            BigDecimal taxPrice = product.getPriceWithTax();
+                BigDecimal totalPrice = product.getPriceWithTax().multiply(new BigDecimal(count));
+
+            invoicePrint += "Produkt: " + name + " Ilosc: " + count + " Cena jednostkowa: " + taxPrice+" PLN Cena calkowita: " + totalPrice +" PLN"+ System.lineSeparator();
+            printedProducts.add(name);
         }
-        sb.append(footer());
-        return sb.toString();
+        invoicePrint += footer();
+        return invoicePrint;
     }
 }

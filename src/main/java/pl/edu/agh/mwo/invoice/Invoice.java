@@ -3,6 +3,7 @@ package pl.edu.agh.mwo.invoice;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+
 import pl.edu.agh.mwo.invoice.product.Product;
 
 public class Invoice {
@@ -30,6 +31,7 @@ public class Invoice {
             throw new IllegalArgumentException();
         }
         products.add(product);
+
         BigDecimal newSubtotal = getSubtotal().add(product.getPrice());
         setSubtotal(newSubtotal);
 
