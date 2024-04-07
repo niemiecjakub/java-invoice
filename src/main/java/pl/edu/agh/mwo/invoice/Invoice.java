@@ -21,16 +21,6 @@ public class Invoice {
         InvoiceCounter.incrementInvoiceCount();
     }
 
-    public String printInvoice(){
-        StringBuilder sb = new StringBuilder();
-        String header = "Numer faktury: " + number + System.lineSeparator();
-        String footer = "Liczba pozycji: " + countProducts();
-        sb.append(header);
-        sb.append(footer);
-        return sb.toString();
-
-    }
-
     public Integer countProducts(){
         return products.size();
     }

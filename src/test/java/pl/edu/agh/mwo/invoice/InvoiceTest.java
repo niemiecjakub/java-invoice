@@ -138,25 +138,6 @@ public class InvoiceTest {
     }
 
     @Test
-    public void testInvoicePrintHeader(){
-        String invoiceHeader = invoice.printInvoice().split(System.lineSeparator())[0];
-        System.out.println(invoiceHeader);
-        System.out.println("----");
-        String[] lines = invoice.printInvoice().split(System.lineSeparator());
-        System.out.println(lines.length);
-        System.out.println(invoice.printInvoice());
-        Assert.assertThat("Numer faktury: " + invoice.getNumber(), Matchers.comparesEqualTo(invoiceHeader));
-    }
-
-    @Test
-    public void testInvoicePrintFooter(){
-        String[] lines = invoice.printInvoice().split(System.lineSeparator());
-        String footer = lines[lines.length - 1];
-
-        Assert.assertThat("Liczba pozycji: " + invoice.countProducts(), Matchers.comparesEqualTo(footer));
-    }
-
-    @Test
     public void testProductCount(){
         //2
         invoice.addProduct(new TaxFreeProduct("Chleb", new BigDecimal("5")), 2);
@@ -166,4 +147,5 @@ public class InvoiceTest {
         invoice.addProduct(new OtherProduct("Pinezka", new BigDecimal("0.01")), 1000);
         Assert.assertThat(1005, Matchers.comparesEqualTo(invoice.countProducts()));
     }
+
 }

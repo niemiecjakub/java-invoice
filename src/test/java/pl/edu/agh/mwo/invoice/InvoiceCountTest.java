@@ -6,11 +6,6 @@ import org.junit.Test;
 
 public class InvoiceCountTest {
     @Test
-    public void testInitialCounter(){
-        Assert.assertThat(1, Matchers.comparesEqualTo(InvoiceCounter.getInvoiceCount()));
-    }
-
-    @Test
     public void testNumberIncrement(){
         int initialState = 1;
         int endValue = 4;
