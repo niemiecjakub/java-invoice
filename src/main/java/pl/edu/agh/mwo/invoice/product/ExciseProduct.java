@@ -9,8 +9,8 @@ public abstract class ExciseProduct extends Product {
         return excisePrice;
     }
 
-    public ExciseProduct(String name, BigDecimal price,BigDecimal excisePrice) {
-        super(name, price,new BigDecimal("0.23"));
+    public ExciseProduct(String name, BigDecimal price, BigDecimal excisePrice) {
+        super(name, price, new BigDecimal("0.23"));
         this.excisePrice = excisePrice;
     }
 

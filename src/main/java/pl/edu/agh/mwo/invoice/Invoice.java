@@ -14,7 +14,7 @@ public class Invoice {
     private BigDecimal total;
     private Collection<Product> products;
 
-    public Invoice(){
+    public Invoice() {
         this.subtotal = new BigDecimal(0);
         this.tax = new BigDecimal(0);
         this.total = new BigDecimal(0);
@@ -23,12 +23,12 @@ public class Invoice {
         InvoiceUtil.incrementInvoiceCount();
     }
 
-    public Integer countProducts(){
+    public Integer countProducts() {
         return products.size();
     }
 
     public void addProduct(Product product) {
-        if(product == null){
+        if (product == null) {
             throw new IllegalArgumentException();
         }
         products.add(product);
@@ -44,10 +44,10 @@ public class Invoice {
     }
 
     public void addProduct(Product product, Integer quantity) {
-        if(quantity == null || quantity <= 0){
+        if (quantity == null || quantity <= 0) {
             throw new IllegalArgumentException();
         }
-        for (int i = 0 ; i<quantity; i++){
+        for (int i = 0; i < quantity; i++) {
             addProduct(product);
         }
     }
@@ -55,11 +55,14 @@ public class Invoice {
     public BigDecimal getSubtotal() {
         return subtotal;
     }
+
     public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
     }
 
-    public BigDecimal getTax() { return tax; }
+    public BigDecimal getTax() {
+        return tax;
+    }
 
     public void setTax(BigDecimal tax) {
         this.tax = tax;
@@ -68,6 +71,7 @@ public class Invoice {
     public BigDecimal getTotal() {
         return total;
     }
+
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
@@ -75,6 +79,7 @@ public class Invoice {
     public Collection<Product> getProducts() {
         return products;
     }
+
     public Integer getNumber() {
         return number;
     }
